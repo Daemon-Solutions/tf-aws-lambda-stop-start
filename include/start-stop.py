@@ -25,6 +25,3 @@ def toggle_instances(start):
         
 def lambda_handler(event, context):
     toggle_instances("wakeup" in event["resources"][0])
-
-def lambda_handler(event, context):
-    toggle_instances("bedtime" in event["resources"][0])
