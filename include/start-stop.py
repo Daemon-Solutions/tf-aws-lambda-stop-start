@@ -14,11 +14,11 @@ def toggle_instances(start):
     print('Looking for instances to {}'.format(action_name))
     # Look for the tag Scheduled-Stop-Start
     description = ec2_client.describe_instances(
-    Filters=[
-        { 'Name': 'instance-state-name', 'Values': ['stopped' if start else 'running'] },
-        { 'Name': 'tag:Scheduled-Stop-Start', 'Values' : ['yes']}
-    ]
-)
+        Filters=[
+            { 'Name': 'instance-state-name', 'Values': ['stopped' if start else 'running'] },
+            { 'Name': 'tag:Scheduled-Stop-Start', 'Values' : ['yes']}
+        ]
+    )
     
     for reservation in description["Reservations"]:
         for instance in reservation["Instances"]:
