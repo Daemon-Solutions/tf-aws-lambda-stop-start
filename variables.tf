@@ -9,3 +9,7 @@ variable "cron_start_schedule" {
 variable "cron_stop_schedule" {
   default = "cron(0 17 * * ? *)"
 }
+
+variable "service" {
+  default = "stop-start"
+}
