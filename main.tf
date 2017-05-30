@@ -64,7 +64,9 @@ resource "aws_iam_policy" "cloudwatch_logaccess" {
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
         "logs:PutLogEvents",
-        "ec2:*"
+        "ec2:Start*",
+        "ec2:Stop*",
+        "ec2:Describe*"
       ],
       "Resource": "*"
     }
