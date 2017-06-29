@@ -1,16 +1,5 @@
-resource "null_resource" "clean_files" {
-  triggers {
-    lambda_version = "${timestamp()}"
-  }
-
-  provisioner "local-exec" {
-    command = "powershell -command {Remove-Item -Path ${path.module}/include/temp -force -ErrorAction SilentlyContinue}"
-  }
-}
-
 ## create lambda package
 data "archive_file" "create_lambda_package" {
-  depends_on  = ["null_resource.clean_files"]
   type        = "zip"
   source_dir  = "${path.module}/include"
   output_path = "${path.module}/include/temp/stop-start.zip"
@@ -82,12 +71,13 @@ resource "aws_iam_policy_attachment" "attachlogaccess" {
 }
 
 resource "aws_lambda_function" "stop_start_lambda" {
-  filename      = "${path.module}/include/temp/stop-start.zip"
-  function_name = "stop-start-schedule"
-  role          = "${aws_iam_role.lambda.arn}"
-  handler       = "start-stop.lambda_handler"
-  runtime       = "python2.7"
-  timeout       = "300"
+  filename         = "${path.module}/include/temp/stop-start.zip"
+  source_code_hash = "${base64sha256(file("${path.module}/include/start-stop.py"))}"
+  function_name    = "stop-start-schedule"
+  role             = "${aws_iam_role.lambda.arn}"
+  handler          = "start-stop.lambda_handler"
+  runtime          = "python2.7"
+  timeout          = "300"
 }
 
 resource "aws_cloudwatch_event_target" "ec2_start" {
