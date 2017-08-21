@@ -73,7 +73,7 @@ resource "aws_iam_policy_attachment" "attachlogaccess" {
 resource "aws_lambda_function" "stop_start_lambda" {
   filename         = ".terraform/stop-start.zip"
   source_code_hash = "${data.archive_file.create_lambda_package.output_base64sha256}"
-  function_name    = "stop-start-schedule"
+  function_name    = "lambda-stop-start-schedule"
   role             = "${aws_iam_role.lambda.arn}"
   handler          = "start-stop.lambda_handler"
   runtime          = "python2.7"
