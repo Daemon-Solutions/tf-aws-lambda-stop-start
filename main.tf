@@ -6,19 +6,19 @@ data "archive_file" "create_lambda_package" {
 }
 
 resource "aws_cloudwatch_event_rule" "ec2_start" {
-  name                = "${var.name}-wakeup"
+  name                = "${var.name}-${var.envname}-wakeup"
   description         = "Capture running, stopped or terminated"
   schedule_expression = "${var.cron_start_schedule}"
 }
 
 resource "aws_cloudwatch_event_rule" "ec2_stop" {
-  name                = "${var.name}-bedtime"
+  name                = "${var.name}-${var.envname}-bedtime"
   description         = "Capture running, stopped or terminated"
   schedule_expression = "${var.cron_stop_schedule}"
 }
 
 resource "aws_iam_role" "lambda" {
-  name = "${var.name}-lambda-role"
+  name = "${var.name}-${var.envname}-lambda-role"
 
   assume_role_policy = <<EOF
 {
@@ -39,7 +39,7 @@ EOF
 }
 
 resource "aws_iam_policy" "cloudwatch_logaccess" {
-  name        = "${var.name}-cloudwatch-logs"
+  name        = "${var.name}-${var.envname}-cloudwatch-logs"
   path        = "/"
   description = "cloudwatch_logs"
 
@@ -65,7 +65,7 @@ EOF
 }
 
 resource "aws_iam_policy_attachment" "attachlogaccess" {
-  name       = "${var.name}-allow-access-to-logs"
+  name       = "${var.name}-${var.envname}-allow-access-to-logs"
   roles      = ["${aws_iam_role.lambda.name}"]
   policy_arn = "${aws_iam_policy.cloudwatch_logaccess.arn}"
 }
