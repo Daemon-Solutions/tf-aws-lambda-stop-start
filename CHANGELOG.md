@@ -25,7 +25,7 @@ IMPROVEMENTS:
 * Streamlined python scripting
 
 
-## v0.0.1 (April 28, 2017)
+## 0.0.1 (April 28, 2017)
 
 Initial version
 
