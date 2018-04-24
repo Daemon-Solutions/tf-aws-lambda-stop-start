@@ -14,7 +14,7 @@ The UTC timing does mean that if scheduling based on GMT+1 you will have to modi
 ### Prerequisites
 
 The only prerequisite is that instances are tagged with the following:
-Key: Scheduled-Start-Stop
+Key: Scheduled-Stop-Start
 Value: yes
 
 Declare a module in your Terraform file, for example:
