@@ -1,3 +1,9 @@
+## 1.0.2 (June 12, 2018)
+
+IMPROVEMENTS:
+* Parameterise AWS region name
+
+
 ## 1.0.1 (August 21, 2017)
 
 IMPROVEMENTS:
