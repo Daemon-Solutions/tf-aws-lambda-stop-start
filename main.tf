@@ -78,6 +78,12 @@ resource "aws_lambda_function" "stop_start_lambda" {
   handler          = "start-stop.lambda_handler"
   runtime          = "python2.7"
   timeout          = "300"
+
+  environment {
+    variables = {
+      region = "${var.region}"
+    }
+  }
 }
 
 resource "aws_cloudwatch_event_target" "ec2_start" {
