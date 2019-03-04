@@ -14,6 +14,12 @@ variable "region" {
   default     = "eu-west-1"
 }
 
+variable "enabled" {
+  description = "Whether or not to enable or disable the scheduled start stop. This allows the flexibility to enable or disable resources per environment"
+  type        = "string"
+  default     = 0
+}
+
 variable "cron_start_schedule" {
   description = "Cron expression stating the start schedule time"
   type        = "string"
